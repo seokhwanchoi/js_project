@@ -1,18 +1,16 @@
 Promise 를 리턴했으면
-then 으로 받으면 받은건 Promise죠
+then 으로 받으면 받은건 Promise
 
- await 해서 resolved 된 값을 얻어야지요
+ await 해서 resolved 된 값을 얻어야
 
 
-[Node] 33 번의 result 는 result.constructor.name 으로 무엇이 나오는가 확인해보세요
-[핑크빈] [오후 9:46] readyState가 바뀔때마다 onReadyStateChange가 실행된다고 하니
+33 번의 result 는 result.constructor.name 으로 무엇이 나오는가 확인
 
-[Node] [오후 9:46] 이것을 찍어보신 코드도 볼수있을까요
-
-[핑크빈] [오후 9:46] xhr.response에 값이 할당되기 전에 이벤트 실행되서 null찍힌거같네요
+readyState가 바뀔때마다 onReadyStateChange가 실행된다고 하니
+xhr.response에 값이 할당되기 전에 이벤트 실행되서 null찍힌거
 
 webapi(브라우저)로 실험하는 거랑 node로 실험하는 거는 다르다
-브라우저에서는 xhr 을 require 하는것이 아니라 내장된 XMLHttpRequest 를 사용하시면 됩니다
+브라우저에서는 xhr 을 require 하는것이 아니라 내장된 XMLHttpRequest 를 사용
 
 
 
@@ -20,34 +18,31 @@ https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState
 여기서 value 0~4까지
 
 
-[Node] [오후 10:17] xhr.send 이거랑 xhr.onreadystatechange 이것의 순서는
-[Node] [오후 10:18] 노드의 xhr2 의 경우 순서에 영향받는지는 테스트해보지 못했는데
-[Node] [오후 10:18] 브라우저의 WebAPI에서는
-[Node] [오후 10:18] 순서가 관련이 없습니다
+xhr.send 이거랑 xhr.onreadystatechange 이것의 순서는
+노드의 xhr2 의 경우 순서에 영향받는지는 테스트해보지 못했는데
+브라우저의 WebAPI에서는
+순서가 관련이 없다
 
 
-[Node] [오후 10:18] 아까 오염의 이유는
-[a] [오후 10:18] 넨네
-[Node] [오후 10:19] xhr 이 전역적으로 정의된적이 테스트과정에서 여러번 반복되고 하는과정에서
-[Node] [오후 10:19] 뭔가 꼬였나봅니다
+
+xhr 이 전역적으로 정의된적이 테스트과정에서 여러번 반복되고 하는과정에서
+크롬 브라우저 오염되고 꼬일 수있다
+이럴 땐 크롬 새로 켜서 about:blank로 켜보기
 
 
-[Node] [오후 10:19] 음 그런건 아니고
-[Node] [오후 10:19] 아까 테스트하셨던 페이지에 또 다른 어떤 코드가 실행되었을지도 몰라서
-[Node] [오후 10:19] about:blank 에서 실행해봤어요
+
+ 아까 테스트하셨던 페이지에 또 다른 어떤 코드가 실행되었을지 모르기 때문에
 
 
-[a] [오후 10:21] 아까
-[a] [오후 10:22] 위에서 null 3번 호출되었던거는
-[a] [오후 10:22] 정확히 어떤 이유때문이죠?
-[Node] [오후 10:22] 그건
-done 상태가 되지 않았을때 그때 xhr.response 를 참조해서 그런것으로 생각돼요
+null 3번 호출되었던 이유.
+=>
+done 상태가 되지 않았을때 그때 xhr.response 를 참조해서 그런것으로 생각됨
 
 
-[Node] [오후 10:22] 상태가
-[Node] [오후 10:22] 2일때 '' 네요
-[Node] [오후 10:23] 아직 응답 바디는 준비되지 않은 상황이네요
-[Node] [오후 10:23] 그리고 3번을 거치면서 body 를 받고
+ 상태가
+2일때 '' 
+아직 응답 바디는 준비되지 않은 상황
+그리고 3번을 거치면서 body 를 받고
 4번이되면 완료가 되는구조
 
 
