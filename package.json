@@ -1,0 +1,25 @@
+{
+  "name": "web2-nodejs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "consolever_1.js",
+  "dependencies": {
+    "xhr2": "^0.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seokhwanchoi/js_project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seokhwanchoi/js_project/issues"
+  },
+  "homepage": "https://github.com/seokhwanchoi/js_project#readme",
+  "type" : "module"
+}

@@ -4,7 +4,7 @@ var xhr = new XMLHttpRequest();
 
 new Promise(function(resolve, reject) {
 
-  resolve('start');
+  resolve('first');
 
 }).then(function(result) {
 
@@ -13,16 +13,24 @@ new Promise(function(resolve, reject) {
   return new Promise((resolve, reject) => { 
     
     xhr.open('GET', 'https://jsonplaceholder.typicode.com/users/1');
-    xhr.send();
+    xhr.send();  //순서가 상관이 없다??
 
-    xhr.onreadystatechange = function() {
-      if (xhr.status===200) {
-        resolve(JSON.parse(xhr.response));
+    xhr.onreadystatechange = function(event) {
+      const { target } = event;
+      if (target.readyState === XMLHttpRequest.DONE) {
+        const { status } = target;
+        if(status == 200){
+          resolve(JSON.parse(xhr.response));
+        } else{
+          reject(new Error(xhr.status));
+        }
       }
-      else{
-        reject(new Error(xhr.status));
-      }
-    }
+
+    };
+
+    //xhr.send();
+
+
     
 
   });
@@ -31,7 +39,7 @@ new Promise(function(resolve, reject) {
 
   console.log(result);
   return new Promise(function(resolve,reject) {
-    resolve('end');
+    resolve('last');
   });
 
 }).then(function(result){
